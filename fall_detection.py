@@ -13,7 +13,7 @@ from utils import *
 from model import *
 
 # get SBU dataset data
-SBU_dir = r'C:\Users\Lin_Shien\Desktop\fall_detection\data_seq\SBU'
+SBU_dir = os.getcwd() + '\data_seq\SBU'
 sbu_dataset = SBU_dataset(SBU_dir)
 sbu_data_pair = sbu_dataset.get_data2D(3)                        # selected from 0,1,2,3,4
 X_0, X_1, X_2, X_3, Y_SBU = sbu_data_pair['train']

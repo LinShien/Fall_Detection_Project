@@ -203,9 +203,9 @@ class my_dataset():
         return X, X_diff, Y
     
     def get_data2D(self):
-        d1, l1 = self.data_to_fixedFrame(r"C:\Users\Lin_Shien\Desktop\fall_detection\data_seq\fall\cocoimg2\skeleton_pos.txt", 9)
-        d2, l2 = self.data_to_fixedFrame(r"C:\Users\Lin_Shien\Desktop\fall_detection\data_seq\sit\cocoimg11\skeleton_pos.txt", 10)
-        d3, l3 = self.data_to_fixedFrame(r"C:\Users\Lin_Shien\Desktop\fall_detection\data_seq\fall\cocoimg2\skeleton_pos.txt", 9)
+        d1, l1 = self.data_to_fixedFrame(os.getcwd() + r'\data_seq\fall\cocoimg2\skeleton_pos.txt', 9)
+        d2, l2 = self.data_to_fixedFrame(os.getcwd() + r'\data_seq\sit\cocoimg11\skeleton_pos.txt', 10)
+        d3, l3 = self.data_to_fixedFrame(os.getcwd() + r'\data_seq\fall\cocoimg2\skeleton_pos.txt', 9)
         #d4, l4 = data_to_fixedFrame(r"C:\Users\Lin_Shien\Desktop\fall_detection\data_seq\walk\cocoimg9\skeleton_pos.txt", 10)
         
         X1, X1_diff, Y1 = self.data_to_matrix2D(d1, l1)
@@ -231,6 +231,7 @@ def coord2org(p):
         p_new[i,0] = 640 - (p[i,0] * 640)
         p_new[i,1] = 480 - (p[i,1] * 240)
     return p_new
+
 
 #Plotting the pose
 def draw_2d_pose(gtorigs): 
@@ -262,8 +263,8 @@ def draw_2d_pose(gtorigs):
         
     plt.show()
 
-#Rescale to be 20 frames
 
+#Rescale to be 20 frames
 def zoom2D(p):
     l = p.shape[0]                   # frames before normalizaion
     p_new = np.empty([20,15,2])      
@@ -271,6 +272,7 @@ def zoom2D(p):
         for n in range(2):
             p_new[:,m,n] = inter.zoom(p[:,m,n], 20/l)[:20]   # 把 joint coord 作縮放
     return p_new
+
 
 #Switch two persons' position
 def mirror(p_0,p_1):
